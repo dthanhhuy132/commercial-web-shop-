@@ -1,0 +1,16 @@
+.input-wrapper {
+  position: relative;
+
+  .show-hide-password {
+    position: absolute;
+    right: 20px;
+    top: 45%;
+    transform: translateY(-50%);
+
+    display: inline-block;
+
+    padding: 10px;
+
+    cursor: pointer !important;
+  }
+}

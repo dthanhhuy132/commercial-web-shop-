@@ -1,0 +1,29 @@
+.social-login {
+  cursor: pointer;
+}
+
+.social-login__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50%;
+  padding: 10px;
+
+  font-weight: 600;
+
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+}
+
+.social-login__google {
+  margin-right: 10px;
+}
+
+.social-login__icon {
+  margin-right: 5px;
+}
