@@ -1,15 +1,14 @@
-import { ADD_TO_CART_LOCAL } from "./action";
+import { ADD_TO_CART_LOCAL, GET_ALL_CART, GET_USER_CART } from "./action";
 
 const initState = {
   cartLocal: JSON.parse(localStorage.getItem(ADD_TO_CART_LOCAL)) || [],
+  userCart: [],
+  allCart: [],
 };
-
-//
 
 export default function cartReducer(state = initState, action) {
   switch (action.type) {
     case ADD_TO_CART_LOCAL:
-      // console.log(action.payload);
       const product = action.payload;
       let newProduct = null;
       if (state.cartLocal.some((item) => item?.id === product?.id)) {
@@ -31,6 +30,18 @@ export default function cartReducer(state = initState, action) {
       return {
         ...state,
         cartLocal: updateCart,
+      };
+
+    case GET_USER_CART:
+      return {
+        ...state,
+        userCart: action.payload.productCart,
+      };
+
+    case GET_ALL_CART:
+      return {
+        ...state,
+        allCart: action.payload,
       };
 
     default:

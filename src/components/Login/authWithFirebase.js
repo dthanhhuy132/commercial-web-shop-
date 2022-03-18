@@ -23,7 +23,6 @@ export default function socialLogin(provider, setUser) {
         image: user.photoURL,
         password: null,
         loginVia: provider.providerId,
-        produceCart: [],
       };
 
       if (userData) setUser(userData);

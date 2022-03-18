@@ -1,21 +1,54 @@
 import "./product-card.scss";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import numeral from "numeral";
 import { Link } from "react-router-dom";
 
 import {} from "../../";
-import { addToCartLocal } from "../../store/carts/action";
+import {
+  addToCartLocal,
+  updateUserCartAsync,
+  updateUserCartAsyncByRemove,
+} from "../../store/carts/action";
 
 function ProductCard({ product }) {
-  // console.log("cartItem", cartItem);
   const dispatch = useDispatch();
   const cartLocal = useSelector((state) => state.Cart.cartLocal);
+  const currentUser = useSelector((state) => state.User.currentUser);
+  const userCart = useSelector((state) => state.Cart.userCart);
 
   function handleClickAddToCard(product) {
-    dispatch(addToCartLocal(product));
+    !currentUser
+      ? dispatch(addToCartLocal(product))
+      : addProductToUserCard(currentUser, product);
   }
+
+  function addProductToUserCard(currentUser, product) {
+    let newUserCart = {};
+
+    if (userCart.some((x) => x.id === product.id)) {
+      userCart.forEach((x) => {
+        if (x.id === product.id) {
+          const oldProdcut = { ...x };
+          newUserCart = {
+            ...x,
+            quantity: (x.quantity += 1),
+          };
+          dispatch(updateUserCartAsyncByRemove(currentUser.id, oldProdcut));
+        }
+      });
+    } else {
+      newUserCart = {
+        ...product,
+        quantity: 1,
+      };
+    }
+
+    dispatch(updateUserCartAsync(currentUser.id, newUserCart));
+  }
+
+  const productCart = currentUser ? currentUser.productCart : cartLocal;
 
   return (
     <div className="col-lg-3 col-md-4 col-sm-6 product-card">

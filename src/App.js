@@ -8,13 +8,19 @@ import LoginPage from "./pages/LoginPage";
 import UserPage from "./pages/UserPage";
 import AdminPage from "./pages/AdminPage";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllUserAsyns } from "./store/users/action";
+import { getALlCartAsync, getUserCartAsync } from "./store/carts/action";
 
 function App() {
+  const currentUser = useSelector((state) => state.User.currentUser);
+  console.log("currentUser trong app", currentUser);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllUserAsyns());
+    dispatch(getALlCartAsync());
+    if (currentUser && currentUser?.id)
+      dispatch(getUserCartAsync(currentUser.id));
   });
   return (
     <div className="App">

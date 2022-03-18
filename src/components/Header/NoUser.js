@@ -21,9 +21,9 @@ function NoUser({ cartLocal, isShowCart, setIsShowCart }) {
           </Link>
         </li>
 
-        <li className="nav-item">
+        <li className="nav-item cart-icon">
           <a
-            className="nav-link"
+            className="nav-link cart-icon"
             href=""
             onClick={(e) => {
               e.preventDefault();

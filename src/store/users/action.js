@@ -1,6 +1,13 @@
-import { async } from "@firebase/util";
-import { collection, addDoc, getDoc, doc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDoc,
+  doc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import fireDB from "../../fireConfig";
+import { createCartForALlUserAsync } from "../carts/action";
 
 export const ADD_USER = "ADD_USER";
 export const GET_USER = "GET_USER";
@@ -15,6 +22,8 @@ export function addUserAsync(newUserData) {
     try {
       const newUser = await addDoc(collection(fireDB, "users"), newUserData);
       dispatch(getCurrentUserAsync(newUser.id));
+      console.log("newUserData", newUserData.email);
+      dispatch(createCartForALlUserAsync(newUserData.email, newUser.id));
     } catch (error) {
       // console.log(error.messagess);
     }

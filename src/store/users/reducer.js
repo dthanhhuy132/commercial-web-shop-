@@ -1,4 +1,11 @@
-import { ADD_USER, GET_USER, GET_ALL_USER, LOG_OUT, USER } from "./action";
+import {
+  ADD_USER,
+  GET_USER,
+  GET_ALL_USER,
+  LOG_OUT,
+  USER,
+  ADD_PRODUCT_TO_USER_CART,
+} from "./action";
 
 const initState = {
   currentUser: JSON.parse(localStorage.getItem(USER)),
@@ -23,6 +30,7 @@ export default function userReducer(state = initState, action) {
         ...state,
         currentUser: null,
       };
+
     default:
       return state;
   }

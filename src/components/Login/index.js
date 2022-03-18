@@ -66,8 +66,6 @@ function Login({ setShowLoginPage, loginClass }) {
     });
   }
 
-  console.log(process.env.REACT_APP_TOKEN_ADMIN_KEY);
-
   return (
     <div className={`animate__animated ${loginClass}`}>
       <h2 className="mb-3">Well come to Commercial Web</h2>

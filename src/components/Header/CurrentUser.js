@@ -11,6 +11,7 @@ function CurrentUser({
   cartLocal,
   isShowCart,
   setIsShowCart,
+  userCart,
 }) {
   return (
     <div
@@ -43,9 +44,9 @@ function CurrentUser({
           </a>
         </li>
 
-        <li className="nav-item">
+        <li className="nav-item cart-icon">
           <a
-            className="nav-link"
+            className="nav-link cart-icon"
             href=""
             onClick={(e) => {
               e.preventDefault();
@@ -53,7 +54,9 @@ function CurrentUser({
             }}
           >
             <BsCart size={20} className="cart-icon" />
-            <div className="cart-number">{cartLocal.length}</div>
+            <div className="cart-number">
+              {userCart.reduce((acc, cur) => acc + cur.quantity, 0)}
+            </div>
           </a>
         </li>
       </ul>
